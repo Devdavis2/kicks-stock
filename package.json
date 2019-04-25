@@ -1,0 +1,29 @@
+{
+  "name": "kicks-stock",
+  "version": "1.0.0",
+  "engines": {
+    "node": "10.15.3"
+  },
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devdavis2/kicks-stock.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Devdavis2/kicks-stock/issues"
+  },
+  "homepage": "https://github.com/Devdavis2/kicks-stock#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.5.3"
+  }
+}
