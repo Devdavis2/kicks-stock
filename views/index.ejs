@@ -4,40 +4,50 @@
 <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
-    <h1>Kicks Stock Seller Inventory Page</h1>
-    <nav>
-        <a href="/kicks/new">Sell your sneakers on Kicks Stock!</a>
-    </nav>
-    <ul>
-<% for(let i = 0; i < kicks.length; i++){ %>
-        <li>
-           The <%=kicks[i].productname; %> <br>
-           <br>
-            is <%=kicks[i].description; %> <br>
-            <br>
-            price: $<%=kicks[i].price; %> <br>
-            <br>
-            available units: <%=kicks[i].qty; %> <br>
-            <br>
-            <% if(kicks[i].inStock === true){ %>
-            It is ready to shop
-            <% } else { %>
+    <div class="container">
+        <h3 class="grey-text text-darken-3">Kicks Stock Seller Inventory Page</h3>
+        <nav>
+            <p class="text-black blue"><a href="/kicks/new">Sell your sneakers on Kicks Stock!</a></p>
+        </nav>
+        <ul>
+            <% for(let i = 0; i < kicks.length; i++){ %>
+            <li>
+                <h4>The <%=kicks[i].productname; %> </h4>
+                <p class="flow-text">is <%=kicks[i].description; %> </p>
+                price: $<%=kicks[i].price; %> <br>
+                <br>
+                available units: <%=kicks[i].qty; %> <br>
+                <br>
+                <% if(kicks[i].inStock === true){ %>
+                It is ready to shop
+                <% } else { %>
                 is not ready to shop
-            <% } %>
-        </li>
+                <% } %>
+            </li>
 
-      <!-- DELETE REQUEST TO THE CORRECT ROUTE AND DELETE BUTTON START HERE. FORM ACTION SHOULD BE INSIDE/COMBINED WITH REQUEST --> 
-      <br>
-    <form action="/kicks/<%=kicks[i].id; %>?_method=DELETE" method="POST">
-        <input type="submit" value="DELETE"/>
-    </form>
-    <br>
-    <a href="/kicks/<%=kicks[i].id; %>/edit">Edit</a>
-    </ul>
-    <% } %>
+            <!-- DELETE REQUEST TO THE CORRECT ROUTE AND DELETE BUTTON START HERE. FORM ACTION SHOULD BE INSIDE/COMBINED WITH REQUEST -->
+            <br>
+            <form class="button-blue" action="/kicks/<%=kicks[i].id; %>?_method=DELETE" method="POST">
+                <input type="submit" value="DELETE" />
+            </form>
+            <br>
+            <a href="/kicks/<%=kicks[i].id; %>/edit">Edit</a>
+        </ul>
+        <% } %>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+    </div>
 </body>
 
 </html>
