@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <h1>Kicks Stock Main Shop Page</h1>
+    <nav>
+        <a href="/kicks/new">Sell your sneakers on Kicks Stock!</a>
+    </nav>
+    <ul>
+<% for(let i = 0; i < kicks.length; i++){ %>
+        <li>
+           The <%=kicks[i].productname; %> <br>
+            is <%=kicks[i].description; %> <br>
+
+            <% if(kicks[i].inStock === true){ %>
+            It is ready to shop
+            <% } else { %>
+            It is not ready to shop
+            <% } %>
+        </li>
+      <!-- DELETE REQUEST TO THE CORRECT ROUTE AND DELETE BUTTON START HERE. FORM ACTION SHOULD BE INSIDE/COMBINED WITH REQUEST --> 
+    <form action="/kicks/<%=kicks[i].id; %>?_method=DELETE" method="POST">
+        <input type="submit" value="DELETE"/>
+    </form>
+    <a href="/kicks/<%=kicks[i].id; %>/edit">Edit</a>
+    </ul>
+    <% } %>
+</body>
+
+</html>

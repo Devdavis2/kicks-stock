@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Kicks Stock Product Detail Page</h1>
+        The <%=kicks.name; %> is  <%=kicks.description; %>.
+        <% if(kicks.inStock === true){ %>
+            It is ready to shop
+        <% } else { %>
+            It is not ready to shop
+        <% } %>
+        <nav>
+            <a href="/kicks">Return to home page</a>
+        </nav>
+    </body>
+</html>
