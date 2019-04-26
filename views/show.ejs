@@ -6,12 +6,22 @@
     </head>
     <body>
         <h1>Kicks Stock Product Detail Page</h1>
-        The <%=kicks.name; %> is  <%=kicks.description; %>.
+           The <%=kicks.productname; %> <br>
+           <br>
+            is <%=kicks.description; %> <br>
+            <br>
+            is <%=kicks.price; %> <br>
+            <br>
+            is <%=kicks.qty; %> <br>
+            <br>
         <% if(kicks.inStock === true){ %>
             It is ready to shop
         <% } else { %>
-            It is not ready to shop
+             It is not ready to shop
         <% } %>
+
+
+
         <nav>
             <a href="/kicks">Return to home page</a>
         </nav>

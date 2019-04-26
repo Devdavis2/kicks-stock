@@ -8,10 +8,11 @@
         <h1>Edit Inventory Items Page</h1>
         <form action="/kicks/<%=kicks.id%>?_method=PUT" method="POST">
     		<!--  NOTE: the form is pre-populated with values for the server-->
-    		Product Name: <input type="text" name="productname" value="<%=kicks.name%>"/><br/>
-    		description: <input type="text" name="description" value="<%=kicks.description%>"/><br/>
-    		In stock:
-            <input type="checkbox" name="inStock"
+            Product Name: <input type="text" name="productname" /><br/>
+            Description: <input type="text" name="description" /><br/>
+            Price: <input type="number" name="price" /><br/>
+            qty: <input type="qty" name="qty" /><br/>
+            In stock: <input type="checkbox" name="inStock"
                 <% if(kicks.inStock === true){ %>
                     checked
                 <% } %>

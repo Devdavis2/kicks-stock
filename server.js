@@ -108,7 +108,7 @@ app.get('/kicks', (req, res) => {
     Kicks.find({}, (error, allKicks) => {
 
 // console log all shows all Index entries
-        console.log(allKicks); 
+        console.log('kicks',allKicks); 
 
         res.render('index.ejs', {
             kicks: allKicks
@@ -116,6 +116,42 @@ app.get('/kicks', (req, res) => {
     });
 });
     
+
+//___________________
+// DISPLAY ROUTE
+app.get('/kicks/shop', (req, res) => {
+    Kicks.find({}, (error, allKicks) => {
+
+// console log all shows all Index entries
+        console.log('kicks',allKicks); 
+
+        res.render('display_index.ejs', {
+            kicks: allKicks
+        });
+    });
+});
+
+// ___________________
+// BUY FUNCTIONALITY 
+app.put('/kicks/shop:id/buy/', (req, res)=>{ 
+    Kicks.findByIdAndUpdate(req.params.id, { $inc: {qty: -1 }},
+        (error, buyKicks) =>{ //find the kicks
+            console.log(error);
+            console.log("====================");
+            
+        res.redirect('/kicks/shop')
+ 
+        });
+    // console.log(req.params.id);
+    
+    });
+
+    // app.put("/kicks/shop/:id/buy/", (req, res) => {
+    //     Kicks.findByIdAndUpdate ( req.params.id, { qty: (req.params.qty - 1) }, (err, buyKicks) => {
+    //         res.redirect(`/kicks/shop/${req.params.id}`);
+    //     }) 
+    // });
+
 //___________________
 // SHOW ROUTE
 
@@ -150,6 +186,21 @@ app.delete('/kicks/:id', (req, res)=>{
     });
 });
 
+// // //___________________
+// // // BUY FUNCTIONALITY 
+// app.put('/kicks/:id/buy/', (req, res)=>{ 
+//     Kicks.findByIdAndUpdate(req.params.id, {qty:(params.id -1)},
+//         (err) =>{ //find the kicks
+//             console.log();
+            
+//         res.redirect('/kicks/')
+ 
+//         });
+//     });
+
+
+
+
 //___________________
 // EDIT ROUTE
 // EDIT ROUTE STEP #1
@@ -169,9 +220,10 @@ app.put('/kicks/:id', (req, res)=>{
         req.body.inStock = false;
     }
     // res.send(req.body);
-// EDIT ROUTE STEP #3
+// UPDATE ROUTE STEP #1
 Kicks.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedKicks)=>{
 
+// UPDATE ROUTE STEP #2 MAKE THE PUT ROUTE REDIRECT BACK TO INDEX PAGE
     res.redirect('/kicks');
 });
 });

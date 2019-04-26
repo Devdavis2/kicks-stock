@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <h1>Kicks Stock Seller Inventory Page</h1>
+    <h1>Kicks Stock Main Shop Page</h1>
     <nav>
         <a href="/kicks/new">Sell your sneakers on Kicks Stock!</a>
     </nav>
@@ -20,22 +20,29 @@
             <br>
             price: $<%=kicks[i].price; %> <br>
             <br>
-            available units: <%=kicks[i].qty; %> <br>
-            <br>
+
             <% if(kicks[i].inStock === true){ %>
-            It is ready to shop
+            It is ready to new
             <% } else { %>
-                is not ready to shop
+                is used
             <% } %>
         </li>
+                <!-- START OF BUY BUTTON -->
+
+                <form class="button" action="/kicks/shop<%=kicks[i].id%>/buy?_method=PUT" method="POST"> <input type="submit" value="BUY">
+                </form>
+        
+                <!-- END OF BUY BUTTON ADDED -->
+        
+                <!-- START OF TRADE BUTTON -->
+        
+                        <form class="button" action="/kicks/shop<%=kicks[i].id%>/trade?_method=PUT" method="POST"> <input type="submit" value="TRADE">
+                        </form>
+                        
+                <!-- END OF TRADE BUTTON ADDED -->
 
       <!-- DELETE REQUEST TO THE CORRECT ROUTE AND DELETE BUTTON START HERE. FORM ACTION SHOULD BE INSIDE/COMBINED WITH REQUEST --> 
-      <br>
-    <form action="/kicks/<%=kicks[i].id; %>?_method=DELETE" method="POST">
-        <input type="submit" value="DELETE"/>
-    </form>
-    <br>
-    <a href="/kicks/<%=kicks[i].id; %>/edit">Edit</a>
+
     </ul>
     <% } %>
 </body>
