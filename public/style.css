@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 
-h1 {
-    color: red;
+.brand-logo img {
+    size: 1em;
 }

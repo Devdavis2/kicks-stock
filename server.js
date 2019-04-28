@@ -7,6 +7,16 @@ const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
 const Kicks = require('./models/kicksStock.js');
+
+// // MOBILE NAV COLLAPSE DEMO
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   const elems = document.querySelectorAll('.sidenav');
+//   const instances = M.Sidenav.init(elems, options);
+// });  
+
+
+
 //___________________
 //Port
 //___________________
@@ -227,6 +237,10 @@ Kicks.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedKic
     res.redirect('/kicks');
 });
 });
+
+// FIXED ACTION BUTTON INITIALIZE
+
+
 
 
 //___________________

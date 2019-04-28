@@ -13,3 +13,7 @@ const kicksSchema = new mongoose.Schema({
 const Kicks = mongoose.model('Kicks', kicksSchema);
 
 module.exports = Kicks;
+
+
+
+
