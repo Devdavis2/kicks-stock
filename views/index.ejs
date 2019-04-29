@@ -2,112 +2,82 @@
 <html>
 
 <head>
-        <% include ../partials/head.ejs %>
+    <% include ../partials/head.ejs %>
 </head>
 
 <body>
+    <nav>
+        <% include ../partials/nav.ejs %>
+    </nav>
 
-<!-- NAVIGATION MENU -->
 
-<ul class="sidenav" id="dropdown-content">
-        <li><a href="/kicks/new/shop">Home</a></li>
-        <li><a href="badges.html">Shop</a></li>
-        <li><a href="/kicks/new">Sell</a></li>
-        <li><a href="mobile.html">Mobile</a></li>
-      </ul>
+    <!-- START OF BODY CONTAINER -->
 
-<nav>
+    <div class="container ">
 
-<div class="nav-wrapper blue lighten-1 text-white">
-<a href="/kicks/shop" class="brand-logo center "><img  src="../images/kicks_stock_logo.png" width="87px" alt="Kicks Stock"
-></a>
+        <h3 class="grey-text text-darken-3">Kicks Stock Seller Inventory Page</h3>
 
-<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-          
-<ul id="dropdown-content" class="left hide-on-med-and-down">
-            <li><a href="/kicks/shop">Home</a></li>
-            <li><a href="/kicks/shop">Shop</a></li>
-            <li><a href="/kicks/new">Sell</a></li>
-          </ul>
-        </div>
-      </nav>
-<!-- start div  container here -->
+    <div class="row">       
+    <% for(let i = 0; i < kicks.length; i++){ %>
+        <div class="col s4">
+              <div class="card">
+                <div class="card-image">
+                  <img src="../images/Jordan1.jpg">
+                  <span class="card-title black-text bold"></span>
+                </div>
+                <div class="card-content center">
+                    <ul>
+                        <li>
+                            <p class="flow-text"> <%=kicks[i].productname; %> </p>
+                            <p class="flow-text">is <%=kicks[i].description; %> </p>
+                            price: $<%=kicks[i].price; %> <br>
+                            <br>
+                            available units: <%=kicks[i].qty; %> <br>
+                            <br>
+                            <% if(kicks[i].inStock === true){ %>
+                            It is ready to shop
+                            <% } else { %>
+                            is not ready to shop
+                            <% } %>
+                        </li>
+                    </ul>
+                </div>
+<div class="card-action">  
+    
+<!-- START OF ADD SKU BUTTON -->
+<a href="/kicks/new">
+<button class="btn blue">Add SKU</button></a>
+<br> <br>
 
-<div class="container">
+<a href="/kicks/<%=kicks[i].id; %>/edit"> <button class="btn blue">Edit SKU</button></a><br> <br>
 
-<h3 class="grey-text text-darken-3">Kicks Stock Seller Inventory Page</h3>
-
-        <ul>
-            <% for(let i = 0; i < kicks.length; i++){ %>
-            <li>
-                    <p class="flow-text">The <%=kicks[i].productname; %> </p>
-                <p class="flow-text">is <%=kicks[i].description; %> </p>
-                price: $<%=kicks[i].price; %> <br>
-                <br>
-                available units: <%=kicks[i].qty; %> <br>
-                <br>
-                <% if(kicks[i].inStock === true){ %>
-                It is ready to shop
-                <% } else { %>
-                is not ready to shop
-                <% } %>
-            </li>
-        </ul>
-          
-
-            <!-- DELETE REQUEST TO THE CORRECT ROUTE AND DELETE BUTTON START HERE. FORM ACTION SHOULD BE INSIDE/COMBINED WITH REQUEST -->
-            <br>
-
-            <a href="/kicks/new">
-            <button class="btn blue">Add SKU</button>
-            </a>
-            <br>   <br>
-            <a href="/kicks/<%=kicks[i].id; %>/edit"> <button class="btn blue">Edit SKU</button></a>
-
-            <br>   <br>
-            <form  action="/kicks/<%=kicks[i].id; %>?_method=DELETE" method="POST"> 
-            <!-- START OF BUTTON AND COLOR -->
-                <button class="btn blue" 
-                 type="submit" value="DELETE">DELETE</button>
-            <!-- END OF BUTTON AND COLOR -->
+<form action="/kicks/<%=kicks[i].id; %>?_method=DELETE" method="POST"> <button class="btn blue" type="submit"
+    value="DELETE">DELETE</button>
             </form>
-            <br>
+    </div>
+    </div>
+    </div>
+    
+
+
+
+<!-- END OF BODY CONTAINER -->
+<% } %>
+</div>
 
         </div>
-<!-- Close div here -->
-            <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                    var elems = document.querySelectorAll('.fixed-action-btn');
-                    var instances = M.FloatingActionButton.init(elems, options);
-                  });
-                    </script>
-
-<!-- FIXED ACTION BUTTON  -->
-<!-- <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red">
-          <i class="large material-icons">mode_edit</i>
-        </a>
-        <ul>
-          <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-          <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-          <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-          <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-        </ul>
-      </div>        -->
 
 
-    
-        <% } %>
+    <!-- MOBILE MENU DROPDOWN INITIALIZER -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const elems = document.querySelectorAll('.sidenav');
+            const instances = M.Sidenav.init(elems, options);
+        });  
+    </script>
 
+    <!-- END OF MOBILE MENU DROPDOWN INITIALIZER -->
 
-
-        <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const elems = document.querySelectorAll('.sidenav');
-    const instances = M.Sidenav.init(elems, options);
-  });  
-        </script>
-    
 </body>
 
 </html>

@@ -2,48 +2,93 @@
 <html>
 
 <head>
-        <% include ../partials/head.ejs %>
+    <% include ../partials/head.ejs %>
 </head>
 
 <body>
-    <h1>Kicks Stock Main Shop Page</h1>
     <nav>
-        <a href="/kicks/new">Sell your sneakers on Kicks Stock!</a>
+        <% include ../partials/nav.ejs %>
     </nav>
-    <ul>
-<% for(let i = 0; i < kicks.length; i++){ %>
-        <li>
-           The <%=kicks[i].productname; %> <br>
-           <br>
-            is <%=kicks[i].description; %> <br>
-            <br>
-            price: $<%=kicks[i].price; %> <br>
-            <br>
 
-            <% if(kicks[i].inStock === true){ %>
-            It is ready to new
-            <% } else { %>
-                is used 
-            <% } %>
-        </li>
-                <!-- START OF BUY BUTTON -->
+    <div class="header white-text center "><h1>Kick Stock</h1>
+    
+    <h5>The official limited edition sneaker reselling platform for sneaker heads</h5>
+    </div>
 
-                <form class="button" action="/kicks/shop<%=kicks[i].id%>/buy?_method=PUT" method="POST"> <input type="submit" value="BUY">
-                </form>
+    <style>
+.header {
+    background-image: url(../images/adidas-Yeezy-Boost-350crop.png);
+    margin-top: -3%;
+    width: 93.6em;
+    height: 600px;
+}    
+    </style>
+
+
+
+
+    <!-- START OF CONTAINER DIV -->
+<div class="container">
+
+    <h4 class="center">Kicks Stock Top Picks</h4>
+
+<!-- START OF CARD FOR LOOP-->
+
+<div class="row">       
+        <% for(let i = 0; i < kicks.length; i++){ %>
+            <div class="col s4">
+                  <div class="card">
+                    <div class="card-image">
+                      <img src="../images/Jordan1.jpg">
+                      <span class="card-title black-text bold"></span>
+                    </div>
+                    <div class="card-content center">
+                        <ul>
+                            <li>
+                                <p class="flow-text"> <%=kicks[i].productname; %> </p>
+                                <p class="flow-text">is <%=kicks[i].description; %> </p>
+                                price: $<%=kicks[i].price; %> <br>
+                                <br>
+                                available units: <%=kicks[i].qty; %> <br>
+                                <br>
+                                <% if(kicks[i].inStock === true){ %>
+                                It is ready to shop
+                                <% } else { %>
+                                is not ready to shop
+                                <% } %>
+                            </li>
+                        </ul>
+                    </div>
+    <div class="card-action">  
         
-                <!-- END OF BUY BUTTON ADDED -->
-        
-                <!-- START OF TRADE BUTTON -->
-        
-                        <form class="button" action="/kicks/shop<%=kicks[i].id%>/trade?_method=PUT" method="POST"> <input type="submit" value="TRADE">
-                        </form>
-                        
-                <!-- END OF TRADE BUTTON ADDED -->
+<!-- START OF BUY BUTTON -->
 
-      <!-- DELETE REQUEST TO THE CORRECT ROUTE AND DELETE BUTTON START HERE. FORM ACTION SHOULD BE INSIDE/COMBINED WITH REQUEST --> 
+<form class="button" action="/kicks/shop<%=kicks[i].id%>/buy?_method=PUT" method="POST">
+    <button class="btn blue" type="submit" value="BUY">BUY</button>
+</form>
 
-    </ul>
+<!-- END OF BUY BUTTON -->
+
+<br>
+<!-- START OF TRADE BUTTON -->
+
+<form class="button" action="/kicks/shop<%=kicks[i].id%>/trade?_method=PUT" method="POST">
+    <button class="btn blue" type="submit" value="TRADE">TRADE</button>
+</form>
+<br>
+<!-- END OF TRADE BUTTON -->
+
+        </div>
+        </div>
+        </div>
+        
+    <!-- END OF BODY CONTAINER -->
     <% } %>
+    </div>
+    
+            </div>
+
+
 </body>
 
 </html>

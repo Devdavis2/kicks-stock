@@ -4,7 +4,12 @@
             <% include ../partials/head.ejs %>
     </head>
     <body>
-        <h1>Kicks Stock Product Detail Page</h1>
+
+<nav>
+        <% include ../partials/nav.ejs %>
+</nav>
+
+        <h3>Kicks Stock Product Detail Page</h3>
            The <%=kicks.productname; %> <br>
            <br>
             is <%=kicks.description; %> <br>
