@@ -12,7 +12,7 @@
     <!-- START OF CONTAINER DIV -->
     <div class="container">
 
-        <h4 class="center black white-text">Product Detail</h4>
+        <h4 class="center blue lighten-3 white-text">Product Detail</h4>
     
     <!-- START OF CARD FOR LOOP-->
     
@@ -34,39 +34,38 @@
     available units: <%=kicks.qty; %> <br>
         <br>
     <% if(kicks.inStock === true){ %>
-                                    It is ready to shop
+                                    New: Deadstock
                                     <% } else { %>
-                                    is not ready to shop
+                                    Used
                                     <% } %>
                                 </li>
                             </ul>
                         </div>
-        <div class="card-action">  
+        <div class="card-action"> 
+        <br> 
             
     <!-- START OF BID BUTTON -->
-    
-    
-    <form class="button" action="/kicks/shop<%=kicks.id%>/bid?_method=PUT" method="POST">
+    <div class="row ">
+    <div class="col"><form class="button" action="/kicks/shop<%=kicks.id%>/bid?_method=PUT" method="POST">
         <button class="btn blue" type="submit" value="BID">BID</button>
-    </form>
-    <br>
+    </form></div>
+
     <!-- START OF BID BUTTON -->
     
     <!-- START OF BUY BUTTON -->
     
-    <form class="button" action="/kicks/shop<%=kicks.id%>/buy?_method=PUT" method="POST">
-        <button class="btn blue" type="submit" value="BUY">BUY</button>
-    </form>
+    <div class="col"><form class="button" action="/kicks/shop<%=kicks.id%>/buy?_method=PUT" method="POST">
+        <button class="btn green" type="submit" value="BUY">BUY</button>
+    </form></div>
     
     <!-- END OF BUY BUTTON -->
     
-    <br>
     <!-- START OF TRADE BUTTON -->
     
-    <form class="button" action="/kicks/shop<%=kicks.id%>/trade?_method=PUT" method="POST">
+    <div class="col"> <form class="button" action="/kicks/shop<%=kicks.id%>/trade?_method=PUT" method="POST">
         <button class="btn blue" type="submit" value="TRADE">TRADE</button>
-    </form>
-    <br>
+    </form></div>
+</div>
     <!-- END OF TRADE BUTTON -->
     
             </div>
@@ -78,6 +77,8 @@
         </div>
 
         <a href="/kicks"><button class="btn blue">Return to Home</button></a><br>
+        <br>
+        <br>
         
                 </div>
     

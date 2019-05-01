@@ -92,7 +92,7 @@ app.get('/kicks/user', (req, res) => {
 
 app.get('/app', (req, res)=>{
     if(req.session.currentUser){
-        console.log(currentUser);
+        // console.log(currentUser);
         
         res.render('app/app_index.ejs')
     } else {
@@ -181,13 +181,6 @@ app.use('/sessions', sessionsController)
 // app.delete('/kicks/:id', (req, res)=>{
 //     res.send('deleting...');
 // });
-
-
-
-
-
-
-
 
 //___________________
 //Listener
