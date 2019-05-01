@@ -10,16 +10,17 @@
         <% include ../partials/nav.ejs %>
     </nav>
 
-    <div class="header white-text center "><h1>Kick Stock</h1>
+    <div class="header white-text center margin-top -10%"><h1>Kick Stock</h1>
     
     <h5>The official limited edition sneaker reselling platform for sneaker heads</h5>
     </div>
 
     <style>
+
 .header {
     background-image: url(../images/adidas-Yeezy-Boost-350crop.png);
     margin-top: -3%;
-    width: 93.6em;
+    width: 100%;
     height: 600px;
 }    
     </style>
@@ -30,37 +31,49 @@
     <!-- START OF CONTAINER DIV -->
 <div class="container">
 
-    <h4 class="center">Kicks Stock Top Picks</h4>
+    <h4 class="center blue lighten-3 white-text">Today's Top Picks</h4>
 
 <!-- START OF CARD FOR LOOP-->
 
 <div class="row">       
         <% for(let i = 0; i < kicks.length; i++){ %>
-            <div class="col s4">
+            <div class="col s12 m4">
                   <div class="card">
                     <div class="card-image">
-                      <img src="../images/Jordan1.jpg">
+                    <img src="<%=kicks[i].img; %>">
                       <span class="card-title black-text bold"></span>
                     </div>
                     <div class="card-content center">
                         <ul>
                             <li>
-                                <p class="flow-text"> <%=kicks[i].productname; %> </p>
-                                <p class="flow-text">is <%=kicks[i].description; %> </p>
-                                price: $<%=kicks[i].price; %> <br>
-                                <br>
-                                available units: <%=kicks[i].qty; %> <br>
-                                <br>
-                                <% if(kicks[i].inStock === true){ %>
-                                It is ready to shop
-                                <% } else { %>
-                                is not ready to shop
-                                <% } %>
+    <a href="<%=kicks[i].id; %>"<p class="flow-text"> <%=kicks[i].productname; %> </a></p>
+    
+    <p class="flow-text">is <%=kicks[i].description; %> </p>
+    
+    price: $<%=kicks[i].price; %> 
+    <br> <br>
+    
+    available units: <%=kicks[i].qty; %> <br><br>
+    
+    <% if(kicks[i].deadStock === true){ %>
+    New: deadStock
+    <% } else { %>
+    Used
+    <% } %>
                             </li>
                         </ul>
                     </div>
     <div class="card-action">  
         
+<!-- START OF BID BUTTON -->
+
+
+<form class="button" action="/kicks/shop<%=kicks[i].id%>/bid?_method=PUT" method="POST">
+    <button class="btn blue" type="submit" value="BID">BID</button>
+</form>
+<br>
+<!-- START OF BID BUTTON -->
+
 <!-- START OF BUY BUTTON -->
 
 <form class="button" action="/kicks/shop<%=kicks[i].id%>/buy?_method=PUT" method="POST">

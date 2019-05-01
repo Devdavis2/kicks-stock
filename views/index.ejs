@@ -20,11 +20,12 @@
     <div class="row">       
     <% for(let i = 0; i < kicks.length; i++){ %>
         <div class="col s4">
-              <div class="card">
+              <div class="card red">
                 <div class="card-image">
-                  <img src="../images/Jordan1.jpg">
+                  <img src="<%=kicks[i].img; %>">
                   <span class="card-title black-text bold"></span>
                 </div>
+
                 <div class="card-content center">
                     <ul>
                         <li>
@@ -32,18 +33,20 @@
                             <p class="flow-text">is <%=kicks[i].description; %> </p>
                             price: $<%=kicks[i].price; %> <br>
                             <br>
+
                             available units: <%=kicks[i].qty; %> <br>
                             <br>
-                            <% if(kicks[i].inStock === true){ %>
-                            It is ready to shop
+                            <% if(kicks[i].deadStock === true){ %>
+                            New: Deadstock
                             <% } else { %>
-                            is not ready to shop
+                            Used
                             <% } %>
                         </li>
                     </ul>
+
                 </div>
 <div class="card-action">  
-    
+
 <!-- START OF ADD SKU BUTTON -->
 <a href="/kicks/new">
 <button class="btn blue">Add SKU</button></a>
@@ -69,12 +72,7 @@
 
 
     <!-- MOBILE MENU DROPDOWN INITIALIZER -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const elems = document.querySelectorAll('.sidenav');
-            const instances = M.Sidenav.init(elems, options);
-        });  
-    </script>
+
 
     <!-- END OF MOBILE MENU DROPDOWN INITIALIZER -->
 

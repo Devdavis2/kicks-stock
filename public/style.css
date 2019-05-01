@@ -1,19 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-ul {
-    list-style-type: none; 
-}
-  
-.row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
 
-.col {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    width: 30%;
+.card-image{
+    height: 35%; 
+    overflow: hidden;
+    border: 1px darkred;
 }

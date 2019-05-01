@@ -4,9 +4,20 @@
 const express = require('express');
 const methodOverride  = require('method-override');
 const mongoose = require ('mongoose');
+require('dotenv').config()
 const app = express ();
 const db = mongoose.connection;
-const Kicks = require('./models/kicksStock.js');
+const session = require('express-session')
+
+// ADDED TO KicksC CONTROLLER ROUTE
+// const Kicks = require('./models/kicksStock.js');
+
+
+
+// ____________________
+// AUTHENTICATION CONFIGURATION
+const mongoURI = process.env.MONGO_URI
+
 
 // // MOBILE NAV COLLAPSE DEMO
 
@@ -29,7 +40,7 @@ const PORT = process.env.PORT || 3000;
 // How to connect to the database either via heroku or locally
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/basiccrud' + `Kicks-stock`;
 
-// Connect to Mongo
+// DATABASE AND DATABASE CONNECTION
 mongoose.connect(MONGODB_URI , { useNewUrlParser: true});
 
 // Error / success
@@ -52,10 +63,54 @@ app.use(express.urlencoded({ extended: false }));// extended: false - does not a
 // app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project
 //use method override
 app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
+app.use(session({
+    secret: "feedmeseymour",
+    resave: false,
+    saveUninitialized: false
+  }))
+
+
+//   app.get('/', (req, res) => {
+//     // res.send('login_index.ejs')
+//     console.log("___________________________")
+//   console.log(req.session);
+//   console.log("___________________________")
+
+//   res.render('login_index.ejs', {
+//     currentUser: req.session.currentUser
+// })
+// });
+
+//___________________
+// LOGIN INDEX ROUTE
+app.get('/kicks/user', (req, res) => {
+
+        res.render('login_index.ejs', {
+            currentUser: req.session.currentUser
+        });
+});
+
+app.get('/app', (req, res)=>{
+    if(req.session.currentUser){
+        console.log(currentUser);
+        
+        res.render('app/app_index.ejs')
+    } else {
+        res.redirect('/sessions/new');
+    }
+})
 
 //___________________
 // START OF ROUTES FROM HERE
+// REPLACED WITH CONTROLLER
+const kicksController = require('./controllers/KicksC');
+app.use(kicksController);
 
+const usersController = require('./controllers/users_controller');
+app.use('/users', usersController);
+
+const sessionsController = require('./controllers/sessions_controller')
+app.use('/sessions', sessionsController)
 //___________________
 // NEW ROUTE
 
@@ -64,10 +119,6 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 //   res.send('Kicks-stock is live!');
 // });
 
-// NEW ROUTE STEP #2 RENDER VIEW
-app.get('/kicks/new', (req, res)=>{
-    res.render('new.ejs');
-});
 
 
 //___________________
@@ -83,21 +134,7 @@ app.get('/kicks/new', (req, res)=>{
 //     res.send(req.body);
 // });
 
-// CREATE ROUTE STEP #3
-app.post('/kicks/', (req, res)=>{
-    if(req.body.inStock === 'on'){ //if checked, req.body.readyToEat is set to 'on'
-        req.body.inStock = true;
-    } else { //if not checked, req.body.readyToEat is undefined
-        req.body.inStock = false;
-    }
-    Kicks.create(req.body, (error, createdKicks)=>{
-        // console.log();
-        
-        // res.send(createdKicks);
-// CREATE ROUTE STEP #4 - REDIRECT AFTER CREATION
-res.redirect('/kicks');
-    });
-});
+
 
 //___________________
 // INDEX ROUTE
@@ -113,48 +150,12 @@ res.redirect('/kicks');
 //     res.render('index.ejs');
 // });
 
-// INDEX ROUTE STEP #3
-app.get('/kicks', (req, res) => {
-    Kicks.find({}, (error, allKicks) => {
 
-// console log all shows all Index entries
-        console.log('kicks',allKicks); 
-
-        res.render('index.ejs', {
-            kicks: allKicks
-        });
-    });
-});
     
 
-//___________________
-// DISPLAY ROUTE
-app.get('/kicks/shop', (req, res) => {
-    Kicks.find({}, (error, allKicks) => {
 
-// console log all shows all Index entries
-        console.log('kicks',allKicks); 
 
-        res.render('display_index.ejs', {
-            kicks: allKicks
-        });
-    });
-});
 
-// ___________________
-// BUY FUNCTIONALITY 
-app.put('/kicks/shop:id/buy/', (req, res)=>{ 
-    Kicks.findByIdAndUpdate(req.params.id, { $inc: {qty: -1 }},
-        (error, buyKicks) =>{ //find the kicks
-            console.log(error);
-            console.log("====================");
-            
-        res.redirect('/kicks/shop')
- 
-        });
-    // console.log(req.params.id);
-    
-    });
 
     // app.put("/kicks/shop/:id/buy/", (req, res) => {
     //     Kicks.findByIdAndUpdate ( req.params.id, { qty: (req.params.qty - 1) }, (err, buyKicks) => {
@@ -172,14 +173,6 @@ app.put('/kicks/shop:id/buy/', (req, res)=>{
 //     });
 // });
 
-// SHOW ROUTE STEP #2
-app.get('/kicks/:id', (req, res)=>{
-    Kicks.findById(req.params.id, (err, foundKicks)=>{
-        res.render('show.ejs', {
-            kicks:foundKicks
-        });
-    });
-});
 
 //___________________
 // DELETE ROUTE
@@ -189,56 +182,9 @@ app.get('/kicks/:id', (req, res)=>{
 //     res.send('deleting...');
 // });
 
-// DELETE ROUTE STEP#2
-app.delete('/kicks/:id', (req, res)=>{
-    Kicks.findByIdAndRemove(req.params.id, (err, deletedKicks)=>{
-        res.redirect('/kicks');//redirect back to fruits index
-    });
-});
-
-// // //___________________
-// // // BUY FUNCTIONALITY 
-// app.put('/kicks/:id/buy/', (req, res)=>{ 
-//     Kicks.findByIdAndUpdate(req.params.id, {qty:(params.id -1)},
-//         (err) =>{ //find the kicks
-//             console.log();
-            
-//         res.redirect('/kicks/')
- 
-//         });
-//     });
 
 
 
-
-//___________________
-// EDIT ROUTE
-// EDIT ROUTE STEP #1
-app.get('/kicks/:id/edit', (req, res)=>{
-    Kicks.findById(req.params.id, (err, foundKicks)=>{ //find the kicks
-        res.render('edit.ejs', {
-            kicks: foundKicks //pass in found kicks
-        });
-    });
-});
-
-// EDIT ROUTE STEP #2
-app.put('/kicks/:id', (req, res)=>{
-    if(req.body.inStock === 'on'){
-        req.body.inStock = true;
-    } else {
-        req.body.inStock = false;
-    }
-    // res.send(req.body);
-// UPDATE ROUTE STEP #1
-Kicks.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedKicks)=>{
-
-// UPDATE ROUTE STEP #2 MAKE THE PUT ROUTE REDIRECT BACK TO INDEX PAGE
-    res.redirect('/kicks');
-});
-});
-
-// FIXED ACTION BUTTON INITIALIZE
 
 
 

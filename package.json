@@ -22,8 +22,11 @@
   },
   "homepage": "https://github.com/Devdavis2/kicks-stock#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
+    "dotenv": "^7.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "express-session": "^1.16.1",
     "materialize-css": "^1.0.0-rc.2",
     "method-override": "^3.0.0",
     "mongoose": "^5.5.3"
