@@ -12,7 +12,7 @@
     <!-- START OF CONTAINER DIV -->
     <div class="container">
 
-        <h4 class="center blue lighten-3 white-text">Product Detail</h4>
+        <h4 class="center blue lighten-3 white-text">Product Overview</h4>
     
     <!-- START OF CARD FOR LOOP-->
     
@@ -27,16 +27,15 @@
                         <div class="card-content center">
                             <ul>
                                 <li>
-        <p class="flow-text"> <%=kicks.productname; %> </p>
-        <p class="flow-text">is <%=kicks.description; %> </p>
-        price: $<%=kicks.price; %> <br>
-    <br>
+        <p class="flow-text"> <%=kicks.productname; %> </p> <br>
+        <p> <%=kicks.description; %> </p> <br>
+       <p> price: $<%=kicks.price; %> </p> <br>
     available units: <%=kicks.qty; %> <br>
         <br>
     <% if(kicks.inStock === true){ %>
                                     New: Deadstock
                                     <% } else { %>
-                                    Used
+                                   Condition: New
                                     <% } %>
                                 </li>
                             </ul>
@@ -76,7 +75,7 @@
 
         </div>
 
-        <a href="/kicks"><button class="btn blue">Return to Home</button></a><br>
+        <a href="/kicks/shop"><button class="btn blue">Back</button></a><br>
         <br>
         <br>
         

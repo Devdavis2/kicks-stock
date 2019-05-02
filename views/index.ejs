@@ -29,17 +29,15 @@
                 <div class="card-content center">
                     <ul>
                         <li>
-                            <p class="flow-text"> <%=kicks[i].productname; %> </p>
-                            <p class="flow-text">is <%=kicks[i].description; %> </p>
+    <p class="flow-text"> <%=kicks[i].productname; %> </p> <br>
+   
                             price: $<%=kicks[i].price; %> <br>
                             <br>
 
                             available units: <%=kicks[i].qty; %> <br>
-                            <br>
+
                             <% if(kicks[i].deadStock === true){ %>
-                            New: Deadstock
                             <% } else { %>
-                            Used
                             <% } %>
                         </li>
                     </ul>

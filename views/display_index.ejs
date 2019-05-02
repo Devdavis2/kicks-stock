@@ -46,24 +46,20 @@
                   <div class="card">
                     <div class="card-image" style="height: 300px">
                     <img src="<%=kicks[i].img; %>">
-                      <span class="card-title black-text bold"></span>
                     </div>
                     <div class="card-content center">
                         <ul>
                             <li>
-    <a href="<%=kicks[i].id; %>"<p class="flow-text"> <%=kicks[i].productname; %> </a></p>
+    <a href="<%=kicks[i].id; %>"<p class="flow-text"> <%=kicks[i].productname; %> </a></p> <br> <br>
+       
+    price: $<%=kicks[i].price; %> <br> <br>
     
-    <p class="flow-text">is <%=kicks[i].description; %> </p>
-    
-    price: $<%=kicks[i].price; %> 
-    <br> <br>
-    
-    available units: <%=kicks[i].qty; %> <br><br>
+    available units: <%=kicks[i].qty; %> <br> <br>
     
     <% if(kicks[i].deadStock === true){ %>
     New: deadStock
     <% } else { %>
-    Used
+    Condition: New
     <% } %>
                             </li>
                         </ul>
